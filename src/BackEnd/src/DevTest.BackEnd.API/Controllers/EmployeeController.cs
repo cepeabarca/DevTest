@@ -6,7 +6,9 @@ using DevTest.BackEnd.Service;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shared.DTO;
+using DevTest.Shared.DTO;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,8 +26,35 @@ namespace DevTest.BackEnd.API.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost]
+        [Route("employeesFilter")]
+        public async Task<ActionResult<IEnumerable<Employee>>> GetFilteredEmployees(FilterDTO filter)
+        {
+            try
+            {
+                var employees = await _employeeService.Get();
+
+                if (!string.IsNullOrEmpty(filter.RFC))
+                {
+                    employees = employees.Where(e => e.RFC.Contains(filter.RFC)).ToList();
+                }
+
+                if (filter.BornDate != null && filter.BornDate != DateTime.MinValue)
+                {
+                    employees = employees.Where(e => e.BornDate.Date == filter.BornDate).ToList();
+                }
+
+                return Ok(employees);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> Get()
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> Get()
         {
             var employees = await _employeeService.Get();
             if (employees == null)

@@ -1,0 +1,56 @@
+﻿@page "/Employee/edit/{id:int}"
+@inject HttpClient Http
+@using DevTest.Shared.DTO
+@inject NavigationManager Navigation
+
+<h3>Añadir película</h3>
+
+@if (_employee == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="@_employee" OnValidSubmit="Put">
+        <DataAnnotationsValidator />
+        <div class="form-group">
+            <label>Name: </label>
+            <InputText @bind-Value="_employee.Name" />
+            <ValidationMessage For="@(() => _employee.Name)" />
+        </div>
+
+        <div class="form-group">
+            <label>LastName</label>
+            <InputText @bind-Value="_employee.LastName" />
+            <ValidationMessage For="@(() => _employee.LastName)" />
+        </div>
+
+        <div class="form-group">
+            <label>RFC: </label>
+            <InputText @bind-Value="_employee.RFC" />
+            <ValidationMessage For="@(() => _employee.RFC)" />
+        </div>
+
+        <div class="form-group">
+            <label>Date Born: </label>
+            <InputDate @bind-Value="_employee.BornDate" />
+            <ValidationMessage For="@(() => _employee.BornDate)" />
+        </div>
+
+        <div class="form-group">
+            <label>Status: </label>
+            <InputSelect @bind-Value="_employee.Status">
+                @foreach (var status in Enum.GetValues(typeof(EmployeeStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => _employee.Status)" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Edit Employee" />
+        </div>
+    </EditForm>
+}
+

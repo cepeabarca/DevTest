@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DevTest.Shared.DTO
 {
-    public enum EmployeeStatus
+    public class FilterDTO
     {
-        NotSet,
-        Active,
-        Inactive,
+        public string? RFC { get; set; }
+
+        public DateTime? BornDate { get; set; }
     }
 }

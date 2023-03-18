@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DevTest.BackEnd.Data.Models;
-using Shared.DTO;
+using DevTest.Shared.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

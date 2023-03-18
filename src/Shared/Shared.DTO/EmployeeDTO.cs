@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DTO
+namespace DevTest.Shared.DTO
 {
     public class EmployeeDTO
     {
@@ -16,7 +16,7 @@ namespace Shared.DTO
         [Required(ErrorMessage = "Por favor indica tu apellido")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "El RFC es obligatorio")]
+        
         [RFC(ErrorMessage = "Invalid RFC format")]
         public string RFC { get; set; }
 

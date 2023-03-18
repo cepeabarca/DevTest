@@ -28,8 +28,19 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddSingleton(mapper);
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Cores", builder =>
+    {
+        builder.AllowAnyHeader();
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
 
+    });
+});
+
+var app = builder.Build();
+app.UseCors("Cores");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

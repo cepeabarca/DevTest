@@ -1,4 +1,4 @@
-﻿using Shared.DTO;
+﻿using DevTest.Shared.DTO;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevTest.BackEnd.Data.Models

@@ -1,4 +1,4 @@
-﻿namespace Shared.DTO
+﻿namespace DevTest.Shared.DTO
 {
     public class EmployeeResult
     {

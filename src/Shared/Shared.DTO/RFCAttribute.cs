@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace Shared.DTO
+namespace DevTest.Shared.DTO
 {
 
     public class RFCAttribute : ValidationAttribute
